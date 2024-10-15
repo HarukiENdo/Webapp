@@ -1,0 +1,98 @@
+/* タスクリスト全体のスタイル */
+ul {
+    list-style-type: none; /* デフォルトの箇条書きスタイルを削除 */
+    padding: 0;
+}
+
+li {
+    background-color: #f8f9fa; /* タスクの背景を淡いグレーに設定 */
+    border: 1px solid #dee2e6; /* 枠線を追加 */
+    padding: 10px;
+    margin-bottom: 10px; /* 各タスク間にスペースを追加 */
+    border-radius: 5px; /* 角を丸く */
+}
+
+/* 完了したタスクのスタイルを変える */
+li.completed {
+    background-color: #1ed849f1; /* 緑色の背景 */
+    text-decoration: line-through; /* 取り消し線 */
+}
+
+form {
+    margin-bottom: 20px; /* フォームとリストの間にスペースを追加 */
+}
+
+input[type="text"] {
+    width: 70%; /* テキストボックスの幅を調整 */
+    padding: 10px; /* 内側にスペースを追加 */
+    font-size: 16px; /* フォントサイズを大きく */
+    border: 2px solid #ced4da; /* 枠線の色を設定 */
+    border-radius: 5px; /* 角を丸く */
+}
+
+button {
+    padding: 10px 15px; /* ボタンのパディングを増やす */
+    font-size: 16px;
+    background-color: #007bff; /* ボタンの背景色 */
+    color: white; /* ボタンの文字色 */
+    border: none; /* 枠線なし */
+    border-radius: 5px; /* 角を丸く */
+}
+
+button:hover {
+    background-color: #0056b3; /* ホバー時の背景色 */
+}
+
+form {
+    margin-bottom: 20px; /* フォームとリストの間にスペースを追加 */
+}
+
+input[type="text"] {
+    width: 70%; /* テキストボックスの幅を調整 */
+    padding: 10px; /* 内側にスペースを追加 */
+    font-size: 16px; /* フォントサイズを大きく */
+    border: 2px solid #ced4da; /* 枠線の色を設定 */
+    border-radius: 5px; /* 角を丸く */
+}
+
+button {
+    padding: 10px 15px; /* ボタンのパディングを増やす */
+    font-size: 16px;
+    background-color: #007bff; /* ボタンの背景色 */
+    color: white; /* ボタンの文字色 */
+    border: none; /* 枠線なし */
+    border-radius: 5px; /* 角を丸く */
+}
+
+button:hover {
+    background-color: #0056b3; /* ホバー時の背景色 */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #5d6874; /* ページ全体の背景色を淡いグレーに */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px; /* コンテンツの幅を最大600pxに制限 */
+    margin: 0 auto; /* 中央寄せ */
+    padding: 20px;
+    background-color: white; /* 背景を白に */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* シャドウを追加 */
+}
+
+button.complete-btn {
+    background-color: #28a745; /* 完了ボタンを緑色に */
+}
+
+button.delete-btn {
+    background-color: #dc3545; /* 削除ボタンを赤色に */
+}
+
+button.complete-btn:hover,
+button.delete-btn:hover {
+    opacity: 0.8; /* ホバー時に少し透明に */
+}

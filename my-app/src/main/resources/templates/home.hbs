@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1 class="text-center">To-Do List</h1>
+
+    <form action="/add" method="POST" class="form-inline">
+        <input type="text" name="taskName" class="form-control" placeholder="Add a new task">
+        <button type="submit" class="btn btn-primary ml-2">Add Task</button>
+    </form>
+
+    <ul class="list-group mt-4">
+        {{#each tasks}}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{name}} - {{#if completed}}<span class="badge badge-success">Completed</span>{{else}}<span class="badge badge-warning">Pending</span>{{/if}}
+                <span>
+                    <form action="/complete/{{id}}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-success">Complete</button>
+                    </form>
+                    <form action="/delete/{{id}}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </span>
+            </li>
+        {{/each}}
+    </ul>
+
+</body>
+</html>

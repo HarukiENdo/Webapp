@@ -1,0 +1,4 @@
+com/example/model/Task.class
+com/example/repository/TaskRepository.class
+com/example/MyApp.class
+com/example/controller/TaskController.class
