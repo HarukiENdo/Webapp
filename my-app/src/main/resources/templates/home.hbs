@@ -12,13 +12,22 @@
 
     <form action="/add" method="POST" class="form-inline">
         <input type="text" name="taskName" class="form-control" placeholder="Add a new task">
+
+        <!-- 優先度を選択するためのセレクトボックス -->
+        <select name="priority" class="form-control ml-2">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select>
+
         <button type="submit" class="btn btn-primary ml-2">Add Task</button>
     </form>
 
     <ul class="list-group mt-4">
         {{#each tasks}}
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{name}} - {{#if completed}}<span class="badge badge-success">Completed</span>{{else}}<span class="badge badge-warning">Pending</span>{{/if}}
+                {{name}} - {{priority}} Priority <!-- 優先度を表示 -->
+                {{#if completed}}<span class="badge badge-success">Completed</span>{{else}}<span class="badge badge-warning">Pending</span>{{/if}}
                 <span>
                     <form action="/complete/{{id}}" method="POST" style="display:inline;">
                         <button type="submit" class="btn btn-sm btn-success">Complete</button>

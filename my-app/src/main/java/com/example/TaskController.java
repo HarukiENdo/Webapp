@@ -13,25 +13,26 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class TaskController {
 
-    @Autowired
+    @Autowired /*役割: SpringのDI（依存性注入）機能を使って、他のクラスやオブジェクトを自動的にインジェクト（注入）します。*/
     private TaskRepository taskRepository;
 
-    @GetMapping("/")
+    @GetMapping("/") /*HTTPのGETリクエスト（ブラウザでページを読み込む操作）を処理します。URLパスが / に対応しており、TaskRepository を使ってデータベースから全タスクを取得し、Model に追加します。*/
     public String home(Model model) {
         model.addAttribute("tasks", taskRepository.findAll());
         return "home";
     }
 
-    @PostMapping("/add")
-    public String addTask(@RequestParam String taskName) {
+    @PostMapping("/add") /*HTTPのPOSTリクエストを処理します。タスク名をリクエストパラメーター taskName として受け取り、新しい Task オブジェクトを作成してデータベースに保存します。*/
+    public String addTask(@RequestParam String taskName, @RequestParam String priority) {
         Task task = new Task();
         task.setName(taskName);
+        task.setPriority(priority); // 優先度を設定
         task.setCompleted(false);
         taskRepository.save(task);
         return "redirect:/";
     }
 
-    @PostMapping("/complete/{id}")
+    @PostMapping("/complete/{id}") /*ここでは、特定のタスクを完了済みとしてマークします。URLに含まれる id（タスクのID）で該当するタスクを検索し、completed フィールドを true に設定してデータベースに保存します。*/
     public String completeTask(@PathVariable Long id) {
         Task task = taskRepository.findById(id).orElse(null);
         if (task != null) {
@@ -41,9 +42,11 @@ public class TaskController {
         return "redirect:/";
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/delete/{id}") /*こちらは、特定のタスクを削除するための処理です。URLに含まれる id に基づいて、該当するタスクを削除します。*/
     public String deleteTask(@PathVariable Long id) {
         taskRepository.deleteById(id);
         return "redirect:/";
     }
+
+    
 }
