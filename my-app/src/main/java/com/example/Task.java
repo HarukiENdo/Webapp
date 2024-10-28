@@ -11,6 +11,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String description; 
     private boolean completed;
     //priority field
     private String priority;
@@ -27,6 +28,10 @@ public class Task {
     // Getters and Setters(name)
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    // Getters and Setters(project descriptions)
+    public String getDescription() { return description; }
+    public void setDescription(String description) {this.description = description; }
 
     public boolean isCompleted() { return completed; }
     public void setCompleted(boolean completed) { this.completed = completed; }
