@@ -61,8 +61,15 @@
       <dependency>
         <groupId>pl.allegro.tech.boot</groupId>
         <artifactId>handlebars-spring-boot-starter</artifactId>
-        <version>0.3.0</version>
+        <version>0.4.1</version>
       </dependency>
+
+      <dependency>
+        <groupId>com.github.jknack</groupId>
+        <artifactId>handlebars-springmvc</artifactId>
+        <version>4.3.1</version>
+      </dependency>
+
 
   </dependencies>
 

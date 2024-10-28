@@ -9,9 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /* Controllerアノテーション付きのクラス・・・Spring MVC のコントローラーであることを示します。ブラウザから送られるリクエストを受け取り、対応するレスポンスを生成します。*/
 @Controller
 public class TaskController {
+
+    private static final Logger logger = LoggerFactory.getLogger(TaskController.class);
 
     @Autowired /*役割: SpringのDI（依存性注入）機能を使って、他のクラスやオブジェクトを自動的にインジェクト（注入）します。*/
     private TaskRepository taskRepository;
@@ -48,5 +52,33 @@ public class TaskController {
         return "redirect:/";
     }
 
-    
+    @GetMapping("/edit/{id}")
+    public String editTask(@PathVariable Long id, Model model) {
+        logger.info("Editing task with ID: {}", id); // IDをログに出力
+        Task task = taskRepository.findById(id).orElse(null);
+        
+        if (task != null) {
+            model.addAttribute("task", task);
+            logger.info("Task found: {}", task); // タスクが見つかった場合のログ
+            return "edit";
+        }
+        
+        logger.warn("Task with ID: {} not found, redirecting to home.", id); // タスクが見つからない場合のログ
+        return "redirect:/"; // タスクが見つからない場合、ホームにリダイレクト
+    }
+
+    // タスクの編集を保存するメソッド
+    @PostMapping("/edit/{id}")
+    public String updateTask(@PathVariable Long id, @RequestParam String taskName, @RequestParam String priority) {
+        Task task = taskRepository.findById(id).orElse(null);
+        if (task != null) {
+            task.setName(taskName);
+            task.setPriority(priority); // 優先度を更新
+            taskRepository.save(task);
+        }
+        return "redirect:/";
+    }
+
+
+
 }
