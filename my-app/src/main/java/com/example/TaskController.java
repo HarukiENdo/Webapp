@@ -27,10 +27,11 @@ public class TaskController {
     }
 
     @PostMapping("/add") /*HTTPのPOSTリクエストを処理します。タスク名をリクエストパラメーター taskName として受け取り、新しい Task オブジェクトを作成してデータベースに保存します。*/
-    public String addTask(@RequestParam String taskName, @RequestParam String priority, @RequestParam(required = false) String description ) {
+    public String addTask(@RequestParam String taskName, @RequestParam String priority, @RequestParam String date, @RequestParam(required = false) String description ) {
         Task task = new Task();
         task.setName(taskName);
         task.setDescription(description);
+        task.setDate(date);
         task.setPriority(priority); // 優先度を設定
         task.setCompleted(false);
         taskRepository.save(task);
@@ -70,11 +71,12 @@ public class TaskController {
 
     // タスクの編集を保存するメソッド
     @PostMapping("/edit/{id}")
-    public String updateTask(@PathVariable Long id, @RequestParam String taskName, @RequestParam String priority, @RequestParam(required = false) String description ) {
+    public String updateTask(@PathVariable Long id, @RequestParam String taskName, @RequestParam String priority, @RequestParam String date, @RequestParam(required = false) String description ) {
         Task task = taskRepository.findById(id).orElse(null);
         if (task != null) {
             task.setName(taskName);
             task.setDescription(description);
+            task.setDate(date);       
             task.setPriority(priority); // 優先度を更新
             taskRepository.save(task);
         }

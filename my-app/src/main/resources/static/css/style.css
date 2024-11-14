@@ -1,9 +1,10 @@
-/* タスクリスト全体のスタイル */
+/* ulタグに適用されるstyle. リストのスタイル（デフォルトの丸い点など）を削除しています。padding: 0;はリスト全体の余白を削除。 */
 ul {
     list-style-type: none; /* デフォルトの箇条書きスタイルを削除 */
     padding: 0;
 }
 
+/* リストアイテムのスタイル 各タスク（liタグ）を囲むボックスの背景色や枠線、内側の余白（padding）、下部の余白（margin-bottom）を設定。また、border-radiusで角を丸く。*/
 li {
     background-color: #f8f9fa; /* タスクの背景を淡いグレーに設定 */
     border: 1px solid #dee2e6; /* 枠線を追加 */
@@ -30,6 +31,7 @@ input[type="text"] {
     border-radius: 5px; /* 角を丸く */
 }
 
+/* ボタンの基本スタイルを設定。背景色、文字色、枠線の有無、角の丸みを指定しています。button:hoverでは、ホバー時（マウスを重ねた時）に背景色が変わるように。*/
 button {
     padding: 10px 15px; /* ボタンのパディングを増やす */
     font-size: 16px;
@@ -47,27 +49,7 @@ form {
     margin-bottom: 20px; /* フォームとリストの間にスペースを追加 */
 }
 
-input[type="text"] {
-    width: 70%; /* テキストボックスの幅を調整 */
-    padding: 10px; /* 内側にスペースを追加 */
-    font-size: 16px; /* フォントサイズを大きく */
-    border: 2px solid #ced4da; /* 枠線の色を設定 */
-    border-radius: 5px; /* 角を丸く */
-}
-
-button {
-    padding: 10px 15px; /* ボタンのパディングを増やす */
-    font-size: 16px;
-    background-color: #007bff; /* ボタンの背景色 */
-    color: white; /* ボタンの文字色 */
-    border: none; /* 枠線なし */
-    border-radius: 5px; /* 角を丸く */
-}
-
-button:hover {
-    background-color: #0056b3; /* ホバー時の背景色 */
-}
-
+/*ページ全体のスタイル*/
 body {
     font-family: 'Arial', sans-serif;
     background-color: #e6e7e7; /* ページ全体の背景色を淡いグレーに */
@@ -75,8 +57,9 @@ body {
     padding: 0;
 }
 
+/*コンテナのスタイル*/
 .container {
-    max-width: 600px; /* コンテンツの幅を最大600pxに制限 */
+    max-width: 1000px; /* コンテンツの幅を最大600pxに制限 */
     margin: 0 auto; /* 中央寄せ */
     padding: 20px;
     background-color: white; /* 背景を白に */
@@ -84,15 +67,51 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* シャドウを追加 */
 }
 
-button.complete-btn {
-    background-color: #28a745; /* 完了ボタンを緑色に */
+/* タスクリストのテーブル全体のスタイル */
+table {
+    width: 100%;
+    border-collapse: collapse; /* テーブルのボーダーを結合 */
+    margin-bottom: 20px;
 }
 
-button.delete-btn {
-    background-color: #dc3545; /* 削除ボタンを赤色に */
+/* テーブルのヘッダーのスタイル */
+thead th {
+    background-color: #0a9698;
+    color: white;
+    padding: 10px;
+    text-align: left;
 }
 
-button.complete-btn:hover,
-button.delete-btn:hover {
+/* テーブルのボディ部分のスタイル */
+tbody tr {
+    border-bottom: 1px solid #dee2e6;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* 偶数行の背景色 */
+}
+
+/* 各セルのパディング */
+td {
+    padding: 10px;
+}
+
+/* 完了ボタンのスタイル */
+button.btn-success {
+    background-color: #28a745;
+    border: none; /*枠線*/
+    color: white; /*文字の色*/
+}
+
+/* 削除ボタンのスタイル */
+button.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: white; 
+}
+
+button.btn-success:hover,
+button.btn-warning:hover,
+button.btn-danger:hover {
     opacity: 0.8; /* ホバー時に少し透明に */
 }

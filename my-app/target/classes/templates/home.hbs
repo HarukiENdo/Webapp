@@ -7,40 +7,70 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-    <h1 class="text-center">To-Do List</h1>
+<body> <!--Webページに表示される部分 -->
+    <div class="container mt-4">
+        <h1>To-Do List</h1> <!-- 見出し1 -->
+        <form action="/add" method="POST"> <!--ADDエンドポイントにPOSTリクエストを送信 --> <!-- POSTリクエストとは、HTTP通信のリクエスト方法、データをサーバーに送信する際に使用される -->
+            <div class="form-group"> <!--divタグはHTMLで区分、セクションを作成するための要素 -->
+                <label for="taskName">Task Name</label>
+                <input type="text" class="form-control" id="taskName" name="taskName" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" class="form-control"> <!--input typeをdateにすることで簡単な日付入力が可能になります -->
+            </div>
+            <div class="form-group">
+                <label for="priority">Priority</label>
+                <select name="priority" class="form-control">
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea type="text" class="form-control" id="description" name="description" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Task</button>
+        </form>
 
-    <form action="/add" method="POST" class="form-inline">
-        <input type="text" name="taskName" class="form-control" placeholder="Add a new task">
-
-        <!-- 優先度を選択するためのセレクトボックス -->
-        <select name="priority" class="form-control ml-2">
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-        </select>
-
-        <button type="submit" class="btn btn-primary ml-2">Add Task</button>
-    </form>
-
-    <ul class="list-group mt-4">
-        {{#each tasks}}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{name}} - {{priority}} Priority <!-- 優先度を表示 -->
-                {{#if completed}}<span class="badge badge-success">Completed</span>{{else}}<span class="badge badge-warning">Pending</span>{{/if}}
-                <span>
-                    <form action="/complete/{{id}}" method="POST" style="display:inline;">
-                        <button type="submit" class="btn btn-sm btn-success">Complete</button>
-                    </form>
-                    <form action="/delete/{{id}}" method="POST" style="display:inline;">
-                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                    </form>
-                    <!-- 編集ボタン -->
-                    <a href="/edit/{{id}}" class="btn btn-sm btn-warning">Edit</a>
-                </span>
-            </li>
-        {{/each}}
-    </ul>
-
+        <hr> <!--　セクションを分ける区切り線　-->
+        
+        <h2>Tasks</h2>  <!-- 見出し2 -->
+        <table class="table"> <!--タスクを列で整理してテーブル表示する -->
+            <thead> <!--テーブルヘッド -->
+                <tr> <!--要素名ライン -->
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Priority</th>
+                    <th>Description</th>
+                    <th>Complete</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each tasks}} <!--tasks配列をループし、各タスクの行を生成 --> <!--each tasksはHandlebarsヘルパー -->
+                    <tr>  <!--現在のタスクのname, priority, descriptionを表示 -->
+                        <td>{{this.name}}</td>
+                        <td>{{this.date}}</td>
+                        <td>{{this.priority}}</td>
+                        <td>{{this.description}}</td>
+                        <td>{{this.complete}}</td>
+                        <td>
+                            <!--Completeボタンは、taskを完了済みにするために/complete/{this.id}にPOSTリクエストを送信 -->
+                            <form action="/complete/{{this.id}}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-success btn-sm">Complete</button>
+                            </form>
+                            <a href="/edit/{{this.id}}" class="btn btn-warning btn-sm">Edit</a> <!-- Editボタンは、タスクを編集するために/edit/{this.id}にリダイレクト -->
+                            <!-- Deleteボタンは、タスクを削除するために/delete/{this.id}にPOSTリクエストを送信 -->
+                            <form action="/delete/{{this.id}}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+</div>
 </body>
 </html>

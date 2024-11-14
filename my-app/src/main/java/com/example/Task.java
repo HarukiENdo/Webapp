@@ -15,8 +15,12 @@ public class Task {
     private boolean completed;
     //priority field
     private String priority;
+    private String date;
+
 
     // fundamentally, variable needs getter and Setter
+    // getはuserの入力を受けるため、String ~(), setはvoid ~(変数名)
+
     // Getters and Setters(priority)
     public String getPriority() { return priority; }
     public void setPriority(String priority) { this.priority = priority; }
@@ -28,6 +32,10 @@ public class Task {
     // Getters and Setters(name)
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    // Getters and Setters(date)
+    public String getDate() { return date; }
+    public void setDate(String date) {this.date = date; }
 
     // Getters and Setters(project descriptions)
     public String getDescription() { return description; }
